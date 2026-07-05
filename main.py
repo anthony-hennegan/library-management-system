@@ -5,12 +5,16 @@ is_open = True
 
 print(f"Welcome to {library_name}")
 reader_name = input("What is your name? ")
-print(f"Hello {reader_name}.")
-view_selection = input("Would you like to view our book selection? ")
+formatted_name = reader_name.strip().title()
 
-if view_selection == "yes":
+print(f"Hello {formatted_name}.")
+
+view_selection = input("Would you like to view our book selection? ")
+cleaned_selection_response = view_selection.strip().lower()
+
+if cleaned_selection_response == "yes":
     print("Ok, here is what we have.")
-elif view_selection == "no":
+elif cleaned_selection_response == "no":
     print("No worries. Have a nice day!")
 else:
     print("Please type yes or no.")
