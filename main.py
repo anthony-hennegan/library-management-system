@@ -1,8 +1,10 @@
 library_name = "Bailey's Books and Bargains"
 librarian = "Anthony"
-book_count = 20
+books = ['The Alchemist', 'Dune', 'The Hobbit']
+book_count = len(books)
 is_open = True
 checkout_limit = 3
+
 
 print(f"Welcome to {library_name}")
 reader_name = input("What is your name? ")
@@ -17,7 +19,12 @@ view_selection = input("Would you like to view our book selection? ")
 cleaned_selection_response = view_selection.strip().lower()
 
 if cleaned_selection_response == "yes" or cleaned_selection_response == "y":
-    print("Ok, great.")
+    print("Ok, great. Here is our selection:")
+    print(books[0])
+    print(books[1])
+    print(books[2])
+    
+    print(f"We have {book_count} books available.")
     requested_books = input("How many books would you like to check out? ")
     requested_books = int(requested_books.strip())
 
