@@ -14,16 +14,21 @@ print(f"Hello {formatted_name}.")
 
 if not is_open:
     print("The library is closed.")
-    
+
+print("")
 view_selection = input("Would you like to view our book selection? ")
 cleaned_selection_response = view_selection.strip().lower()
 
 if cleaned_selection_response == "yes" or cleaned_selection_response == "y":
-    print("Ok, great. Here is our selection:")
-    print(books[0])
-    print(books[1])
-    print(books[2])
+    print("Ok, great. Below is our selection.")
+    print("")
+    print("Bailey's Books")
+    print("----------------")
     
+    for book in books:
+        print(f"- {book}")
+        
+    print("") 
     print(f"We have {book_count} books available.")
     requested_books = input("How many books would you like to check out? ")
     requested_books = int(requested_books.strip())
