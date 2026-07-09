@@ -1,6 +1,22 @@
+books = [
+    {
+        "title": "The Alchemist",
+        "author": "Paulo Coelho",
+        "checked_out": True
+    },
+    {
+        "title": "Dune",
+        "author": "Frank Herbert",
+        "checked_out": False
+    },
+    {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "checked_out": False
+    }
+]
 library_name = "Bailey's Books and Bargains"
 librarian = "Anthony"
-books = ['The Alchemist', 'Dune', 'The Hobbit']
 book_count = len(books)
 is_open = True
 checkout_limit = 3
@@ -26,10 +42,14 @@ if cleaned_selection_response == "yes" or cleaned_selection_response == "y":
     print("----------------")
     
     for book in books:
-        print(f"- {book}")
+        if book["checked_out"]:
+            print(f"- {book['title']} by {book['author']} ---- Unavailable")
+        else:
+            print(f"- {book['title']} by {book['author']} ---- Available")
         
+ 
     print("") 
-    print(f"We have {book_count} books available.")
+    print(f"We have {book_count} books in our library.")
     requested_books = input("How many books would you like to check out? ")
     requested_books = int(requested_books.strip())
 
