@@ -35,16 +35,28 @@ def format_name(name):
 def format_response(response):
     return response.strip().lower()
 
-def display_books(book_list):
+def is_available(book):
+    return not book["checked_out"]
+
+def display_available_books(book_list):
+    print("Available for Checkout")
+    print("----------------------")
     for book in book_list:
-        if book["checked_out"]:
-            print(f"- {book['title']} by {book['author']} ---- Unavailable")
-        else:
-            print(f"- {book['title']} by {book['author']} ---- Available")
+        available = is_available(book)
+        if available:
+            print(f"{book['title']} by {book['author']}")
+            
+def display_checked_out_books(book_list):
+    print("Currently Checked Out")
+    print("----------------------")
+    for book in book_list:
+        available = is_available(book)
+        if not available:
+            print(f"{book['title']} by {book['author']}")
             
 # Render Section    
 show_welcome_message(library_name)
-
+print("") 
 reader_name = input("What is your name? ")
 reader_name = format_name(reader_name)
 
@@ -60,11 +72,13 @@ view_selection_response = format_response(view_selection_response)
 if view_selection_response == "yes" or view_selection_response == "y":
     print("Ok, great. Below is our selection.")
     print("")
-    print("Bailey's Books")
-    print("----------------")
-    display_books(books)
     
+    display_available_books(books)
     print("") 
+    
+    display_checked_out_books(books)
+    print("") 
+    
     print(f"We have {book_count} books in our library.")
     requested_books = input("How many books would you like to check out? ")
     requested_books = int(format_response(requested_books))
