@@ -27,7 +27,6 @@ books = [
 
 library_name = "Bailey's Books and Bargains"
 librarian = "Anthony"
-is_open = True
 available_books = count_available_books(books)
 checkout_limit = 3
 
@@ -40,44 +39,61 @@ reader_name = format_name(reader_name)
 
 greet_reader(reader_name)
 
-if not is_open:
-    print("The library is closed.")
-
 print("")
-view_selection_response = input(
-    "Would you like to view our book selection? "
-    )
-view_selection_response = format_response(view_selection_response)
-print("")
+while True:
+    view_selection_response = input(
+        "Would you like to view our book selection? "
+        )
 
-if view_selection_response == "yes" or view_selection_response == "y":
-    print("Ok, great. Below is our selection.")
+    view_selection_response = format_response(view_selection_response)
     print("")
-        
-    display_available_books(books)
-    print("") 
-        
-    display_checked_out_books(books)
-    print("") 
-        
-    print(f"We have {available_books} books available for checkout.")
-    requested_books = input("How many books would you like to check out? ")
-    
-    try:
-        requested_books = int(format_response(requested_books))
-        
-        if requested_books <= checkout_limit and requested_books > 0:
-            print("Perfect. Let's get you fixed up.")
-        elif requested_books == 0:
-            print("No worries. Have a nice day.")
-        else:
-            print("Checkout is not available.")
-            
-    except ValueError:
-        print("Please enter a number.")
 
-elif view_selection_response == "no" or view_selection_response == "n":
-    print("No worries. Have a nice day!")
+    if view_selection_response == "yes" or view_selection_response == "y":
+        print("Ok, great. Below is our selection.")
+        print("")
+            
+        display_available_books(books)
+        print("") 
+            
+        display_checked_out_books(books)
+        print("") 
+            
+        print(f"We have {available_books} books available for checkout.")
+        
+        while True:
+            requested_books = input(
+                "How many books would you like to check out? "
+                )
+            
+            try:
+                requested_books = int(format_response(requested_books))
+                
+                if (
+                    requested_books <= available_books 
+                    and requested_books <= checkout_limit
+                    and requested_books > 0
+                ):
+                    print("Perfect. Let's get you fixed up.")
+                    break
+                
+                elif requested_books == 0:
+                    print("No worries. Have a nice day.")
+                    break
+                else:
+                    print("Number must be within available amount.")
+                
+            except ValueError:
+                print("Please enter a number.")
+                
+        break
     
-else:
-    print("Please type yes or no.")
+    elif view_selection_response == "no" or view_selection_response == "n":
+        print("No worries. Have a nice day!")
+        break
+        
+    else:
+        print("Please type yes or no.")
+    
+
+            
+
