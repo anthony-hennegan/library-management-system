@@ -1,6 +1,66 @@
 from utils import format_name
 
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+        self.checked_out = False
+        
+    def checkout(self):
+        if self.checked_out:
+            return False
+        
+        self.checked_out = True
+        return True
+    
+    def return_book(self):
+        if self.checked_out:
+            self.checked_out = False
+            return True
+        
+        return False
+    
+class Library:
+    def __init__(self, name, book_list):
+        self.name = name
+        self.books = book_list
+    
+    def find_book(self, title):
+        for book in self.books:
+            if title == book.title:
+                return book
+            
+            return None
+        
+    def add_book(self, book):
+        self.books.append(book)
+        return True
+    
+    def remove_book(self, title):
+        book = self.find_book(title)
+        
+        if book is None:
+            return False
+        
+        self.books.remove(book)
+        return True
+    
+    def checkout_book(self, title):
+        book = self.find_book(title)
+        
+        if book is None:
+            return False
+        
+        return book.checkout()
 
+    def return_book(self, title):
+        book = self.find_book(title)
+        
+        if book is None:
+            return False
+        
+        return book.return_book()
+    
 def is_available(book):
     return not book["checked_out"]
     
