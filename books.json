@@ -1,0 +1,22 @@
+[
+    {
+        "title": "The Alchemist",
+        "author": "Paulo Coelho",
+        "checked_out": true
+    },
+    {
+        "title": "Dune",
+        "author": "Frank Herbert",
+        "checked_out": false
+    },
+    {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "checked_out": false
+    },
+    {
+        "title": "Harry Potter",
+        "author": "Something Rowling",
+        "checked_out": false
+    }
+]

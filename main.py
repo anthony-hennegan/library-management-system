@@ -1,12 +1,11 @@
 from menus import (
-    show_welcome_message, 
+    show_welcome_message,
     greet_reader,
     show_main_menu
     )
 from catalog import (
-    display_available_books, 
-    display_checked_out_books, 
-    count_available_books,
+    display_available_books,
+    display_checked_out_books,
     search_book_by_title,
     checkout_book,
     return_book,
@@ -14,6 +13,8 @@ from catalog import (
     remove_book
 )
 from utils import format_name
+from storage import load_books, save_books
+
 
 # State
 menu_options = [
@@ -25,23 +26,8 @@ menu_options = [
     "Remove Book",
     "Exit"
 ]
-books = [
-    {
-        "title": "The Alchemist",
-        "author": "Paulo Coelho",
-        "checked_out": True
-    },
-    {
-        "title": "Dune",
-        "author": "Frank Herbert",
-        "checked_out": False
-    },
-    {
-        "title": "The Hobbit",
-        "author": "J.R.R. Tolkien",
-        "checked_out": False
-    }
-]
+
+books = load_books()
 
 library_name = "Bailey's Books and Bargains"
 
@@ -81,24 +67,28 @@ while True:
         checkout_title = input("Which book would you like to checkout? ") 
         print("")
         
-        checkout_book(checkout_title, books)
+        if checkout_book(checkout_title, books):
+            save_books(books)
 
     elif users_choice == '4':
         return_title = input("Which book would you like to return? ") 
         print("")
         
-        return_book(return_title, books)
+        if return_book(return_title, books):
+            save_books(books)
         
     elif users_choice == '5':
         title = input("Enter book title: ")
         author = input("Enter author name: ")
         
-        add_book(title, author, books)
+        if add_book(title, author, books):
+            save_books(books)
 
     elif users_choice == '6':
         title = input("Enter book title: ")
         
-        remove_book(title, books)
+        if remove_book(title, books):
+            save_books(books)
              
     elif users_choice == '7':
         print("Thanks for stopping by!")

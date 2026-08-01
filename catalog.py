@@ -1,5 +1,6 @@
 from utils import format_name
 
+
 def is_available(book):
     return not book["checked_out"]
     
@@ -59,33 +60,32 @@ def checkout_book(title, book_list):
             if not book['checked_out']:
                 book["checked_out"] = True
                 print(f'Successfully checked out "{book["title"]}".')
+                return True
             else:
                 print("Book is already checked out")
-                
-            break
+                return False
  
     if not found_book:
         print("Book not found.")
+        return False
         
 def return_book(title, book_list):
     title = title.strip().lower()
-    found_book = False
     
     #search for book
     for book in book_list:
         if title == book['title'].lower():
-            found_book = True
-            
             if book['checked_out']:
                 book['checked_out'] = False
                 print(f"{book['title']} has been returned.")
+                return True
             else:
                 print(f"{book['title']} is already returned.")
-                
-            break
+                return False
+            
         
-    if not found_book:
-        print("Book not found.")
+    print("Book not found.")
+    return False
     
 def add_book(title, author, book_list):
     book_title = format_name(title)
@@ -97,21 +97,18 @@ def add_book(title, author, book_list):
         "checked_out": False
     }
     book_list.append(new_book)
+    
     print(f"{book_title} has been added to catalog.")
     
 def remove_book(title, book_list):
-
-    found_book = False
     title = title.strip().lower()
     
     for book in book_list:
-        
         if title == book['title'].lower():
-            found_book = True
             book_list.remove(book)
             print(f"{book['title']} has been removed from catalog.")
-            
-            break
-    if not found_book:
-        print("Book not found.")
+            return True
+        
+    print("Book not found.")
+    return False
     
