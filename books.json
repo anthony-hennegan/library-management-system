@@ -18,5 +18,10 @@
         "title": "Harry Potter",
         "author": "Something Rowling",
         "checked_out": false
+    },
+    {
+        "title": "New Book",
+        "author": "Me",
+        "checked_out": false
     }
 ]

@@ -10,7 +10,8 @@ from catalog import (
     checkout_book,
     return_book,
     add_book,
-    remove_book
+    remove_book,
+    Library
 )
 from utils import format_name
 from storage import load_books, save_books
@@ -28,8 +29,8 @@ menu_options = [
 ]
 
 books = load_books()
-
 library_name = "Bailey's Books and Bargains"
+library = Library(library_name, books)
 
 # Render Section    
 
@@ -51,44 +52,44 @@ while True:
     print("")
 
     if users_choice == '1':
-        display_available_books(books)
+        display_available_books(library.books)
         print("")
             
-        display_checked_out_books(books)
+        display_checked_out_books(library.books)
         print("")
     
     elif users_choice == '2':
         search_title = input("Enter book title: ")
         print("")
 
-        search_book_by_title(search_title, books)
+        search_book_by_title(search_title, library)
         
     elif users_choice == '3':
         checkout_title = input("Which book would you like to checkout? ") 
         print("")
         
-        if checkout_book(checkout_title, books):
-            save_books(books)
+        if checkout_book(checkout_title, library):
+            save_books(library.books)
 
     elif users_choice == '4':
         return_title = input("Which book would you like to return? ") 
         print("")
         
-        if return_book(return_title, books):
-            save_books(books)
+        if return_book(return_title, library):
+            save_books(library.books)
         
     elif users_choice == '5':
         title = input("Enter book title: ")
         author = input("Enter author name: ")
         
-        if add_book(title, author, books):
-            save_books(books)
+        if add_book(title, author, library):
+            save_books(library.books)
 
     elif users_choice == '6':
         title = input("Enter book title: ")
         
-        if remove_book(title, books):
-            save_books(books)
+        if remove_book(title, library):
+            save_books(library.books)
              
     elif users_choice == '7':
         print("Thanks for stopping by!")
