@@ -53,7 +53,7 @@ class Library:
         if book is None:
             return None
         
-        if not book.checkout():
+        if book.checkout() is False:
             return False
         
         return book
