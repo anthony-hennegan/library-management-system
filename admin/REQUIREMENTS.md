@@ -47,9 +47,7 @@ Each book shall contain the following information:
 |--------|-------------|
 | Title | Name of the book |
 | Author | Name of the author |
-| Genre | Category of the book |
-| Year Published | Year the book was published |
-| Read Status | Indicates whether the book has been read |
+| Checked_Out | Indicates whether the book has been checked out|
 
 ---
 
@@ -75,15 +73,10 @@ The application shall be developed using:
 - Functions
 - Lists
 - Dictionaries
+- Classes
 - Loops
 - Conditional statements
 - JSON file storage
-
-
-The project shall **not** use:
-
-- Classes
-- External libraries
 
 ---
 
@@ -94,7 +87,6 @@ The application must:
 - Reject invalid menu selections.
 - Prevent empty book titles.
 - Prevent empty author names.
-- Validate that the publication year is numeric.
 - Handle searches with no matching results.
 - Confirm before deleting a book.
 - Handle missing or empty save files without crashing.
@@ -106,10 +98,8 @@ The application must:
 
 After all required functionality has been completed, consider implementing:
 
-- Search by genre.
-- Search by read status.
+- Search by checked out status.
 - Sort books alphabetically.
-- Sort books by publication year.
 - Book ratings.
 - Personal notes for each book.
 - Date added.

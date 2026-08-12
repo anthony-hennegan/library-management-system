@@ -33,7 +33,17 @@ class Library:
                 return book
             
         return None
+    
+    def find_books_by_author(self, author):
+        author = author.strip().lower()
+        books_by_author = []
         
+        for book in self.books:
+            if book.author.lower() == author:
+                books_by_author.append(book)
+        
+        return books_by_author
+    
     def add_book(self, book):
         self.books.append(book)
         return book
@@ -116,7 +126,26 @@ def search_book_by_title(title, library):
         print("Available: Yes")
         
     return True
-                   
+
+def search_book_by_author(author, library):
+    books = library.find_books_by_author(author)
+    
+    if books == []:
+        print("No books for this author.")
+        print()
+        return False
+    
+    for book in books:
+        print(f"Title: {book.title}")
+        print(f"Author: {book.author}")
+        
+        if book.checked_out:
+            print("Available: No")
+        else:
+            print("Available: Yes")
+            
+    print()
+    return True              
         
 def checkout_book(title, library):
     book = library.checkout_book(title)

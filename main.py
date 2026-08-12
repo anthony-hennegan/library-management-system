@@ -7,6 +7,7 @@ from catalog import (
     display_available_books,
     display_checked_out_books,
     search_book_by_title,
+    search_book_by_author,
     checkout_book,
     return_book,
     add_book,
@@ -20,7 +21,8 @@ from storage import load_books, save_books
 # State
 menu_options = [
     "View Books",
-    "Search Books",
+    "Search by Title",
+    "Search by Author",
     "Check Out Book",
     "Return Book",
     "Add Book",
@@ -28,7 +30,12 @@ menu_options = [
     "Exit"
 ]
 
-books = load_books()
+try:
+    books = load_books()
+except FileNotFoundError:
+    print("No saved book data found. Starting with an empty library.")
+    books = []
+    
 library_name = "Bailey's Books and Bargains"
 library = Library(library_name, books)
 
@@ -65,33 +72,39 @@ while True:
         search_book_by_title(search_title, library)
         
     elif users_choice == '3':
+        search_title = input("Enter author's name: ")
+        print("")
+
+        search_book_by_author(search_title, library)
+        
+    elif users_choice == '4':
         checkout_title = input("Which book would you like to checkout? ") 
         print("")
         
         if checkout_book(checkout_title, library):
             save_books(library.books)
 
-    elif users_choice == '4':
+    elif users_choice == '5':
         return_title = input("Which book would you like to return? ") 
         print("")
         
         if return_book(return_title, library):
             save_books(library.books)
         
-    elif users_choice == '5':
+    elif users_choice == '6':
         title = input("Enter book title: ")
         author = input("Enter author name: ")
         
         if add_book(title, author, library):
             save_books(library.books)
 
-    elif users_choice == '6':
+    elif users_choice == '7':
         title = input("Enter book title: ")
         
         if remove_book(title, library):
             save_books(library.books)
              
-    elif users_choice == '7':
+    elif users_choice == '8':
         print("Thanks for stopping by!")
         break
     

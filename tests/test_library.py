@@ -110,3 +110,29 @@ def test_return_book_already_returned():
     
     assert result is False
     assert book1.checked_out is False
+    
+def test_find_books_by_author():
+    author = 'author1'
+    book1 = Book('book1', author)
+    book2 = Book('book2', author)
+    book3 = Book('book3', 'author2')
+    
+    book_list = [book1, book2, book3]
+
+    library = Library('Test Library', book_list)
+    result = library.find_books_by_author(author)
+    
+    assert result == [book1, book2]
+
+def test_find_books_by_author_with_no_books():
+    author = 'author1'
+    book1 = Book('book1', author)
+    book2 = Book('book2', author)
+    book3 = Book('book3', author)
+    
+    book_list = [book1, book2, book3]
+
+    library = Library('Test Library', book_list)
+    result = library.find_books_by_author('author2')
+    
+    assert result == []
