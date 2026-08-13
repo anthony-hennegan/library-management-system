@@ -20,6 +20,16 @@ class Book:
         
         return False
     
+    def update_title(self, new_title):
+        self.title = new_title
+        
+        return self
+    
+    def update_author(self, new_author):
+        self.author = new_author
+        
+        return self
+    
 class Library:
     def __init__(self, name, book_list):
         self.name = name
@@ -57,6 +67,28 @@ class Library:
         self.books.remove(book)
         return book
     
+    def update_book_title(self, book, new_title):
+        new_title = new_title.strip()
+        
+        if book is None:
+            return None
+        
+        if not new_title:
+            return False
+        
+        return book.update_title(new_title)
+
+    def update_book_author(self, book, new_author):
+        new_author = new_author.strip()
+        
+        if book is None:
+            return None
+        
+        if not new_author:
+            return False
+        
+        return book.update_author(new_author)
+        
     def checkout_book(self, title):
         book = self.find_book(title)
         
@@ -67,6 +99,7 @@ class Library:
             return False
         
         return book
+    
 
     def return_book(self, title):
         book = self.find_book(title)
@@ -195,4 +228,24 @@ def remove_book(title, library):
         return False
     
     print(f"{book.title} has been removed from catalog.")
+    return True
+
+def update_book_title(library, old_title, new_title):
+    old_title = old_title.strip().lower()
+    book = library.find_book(old_title)
+    
+    if book is None:
+        print("Book not found.")
+        print()
+        return None
+
+   
+    updated_book = library.update_book_title(book, new_title)
+    
+    if updated_book is False:
+        print("Invalid Title.")
+        print()
+        return False
+    
+    print(f"{book.title} has been changed to {updated_book.title}")
     return True
