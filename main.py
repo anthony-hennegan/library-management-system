@@ -58,53 +58,53 @@ while True:
     users_choice = input("Enter option number: ").strip()
     print("")
 
-    if users_choice == '1':
+    if users_choice == menu_options.index("View Books"):
         display_available_books(library.books)
         print("")
             
         display_checked_out_books(library.books)
         print("")
     
-    elif users_choice == '2':
+    elif users_choice == menu_options.index("Search by Title"):
         search_title = input("Enter book title: ")
         print("")
 
         search_book_by_title(search_title, library)
         
-    elif users_choice == '3':
+    elif users_choice == menu_options.index("Search by Author"):
         search_title = input("Enter author's name: ")
         print("")
 
         search_book_by_author(search_title, library)
         
-    elif users_choice == '4':
+    elif users_choice == menu_options.index("Check Out Book"):
         checkout_title = input("Which book would you like to checkout? ") 
         print("")
         
         if checkout_book(checkout_title, library):
             save_books(library.books)
 
-    elif users_choice == '5':
+    elif users_choice == menu_options.index("Return Book"):
         return_title = input("Which book would you like to return? ") 
         print("")
         
         if return_book(return_title, library):
             save_books(library.books)
         
-    elif users_choice == '6':
+    elif users_choice == menu_options.index("Add Book"):
         title = input("Enter book title: ")
         author = input("Enter author name: ")
         
         if add_book(title, author, library):
             save_books(library.books)
 
-    elif users_choice == '7':
+    elif users_choice == menu_options.index("Remove Book"):
         title = input("Enter book title: ")
         
         if remove_book(title, library):
             save_books(library.books)
              
-    elif users_choice == '8':
+    elif users_choice == menu_options.index("Exit"):
         print("Thanks for stopping by!")
         break
     
