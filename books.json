@@ -6,8 +6,8 @@
     },
     {
         "title": "Dune",
-        "author": "Frank Herbert",
-        "checked_out": false
+        "author": "F. Herbert",
+        "checked_out": true
     },
     {
         "title": "The Hobbit",

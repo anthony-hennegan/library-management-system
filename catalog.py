@@ -58,9 +58,8 @@ class Library:
         self.books.append(book)
         return book
     
-    def remove_book(self, title):
-        book = self.find_book(title)
-        
+    def remove_book(self, book):
+         
         if book is None:
             return None
         
@@ -150,13 +149,17 @@ def search_book_by_title(title, library):
         print()
         return False
     
+    print("     SEARCH RESULTS    ")
+    print("-----------------------")
     print(f"Title: {book.title}")
     print(f"Author: {book.author}")
     
     if book.checked_out:
         print("Available: No")
+        print()
     else:
         print("Available: Yes")
+        print()
         
     return True
 
@@ -164,20 +167,25 @@ def search_book_by_author(author, library):
     books = library.find_books_by_author(author)
     
     if books == []:
+        print("     SEARCH RESULTS    ")
+        print("-----------------------")
         print("No books for this author.")
         print()
         return False
     
     for book in books:
+        print("     SEARCH RESULTS    ")
+        print("-----------------------")
         print(f"Title: {book.title}")
         print(f"Author: {book.author}")
         
         if book.checked_out:
             print("Available: No")
+            print()
         else:
             print("Available: Yes")
+            print()
             
-    print()
     return True              
         
 def checkout_book(title, library):
@@ -192,6 +200,7 @@ def checkout_book(title, library):
         return False
         
     print(f'Successfully checked out "{book.title}".')
+    print()
     return True
 
                  
@@ -203,10 +212,11 @@ def return_book(title, library):
         return False
     
     if book is False:
-        print(f"{book.title} was never checked out.")
+        print("Book is already returned.")
         return False
     
     print(f'Successfully returned "{book.title}".')
+    print()
     return True
 
     
@@ -218,17 +228,33 @@ def add_book(title, author, library):
     library.add_book(book)
     
     print(f"{book.title} has been added to catalog.")
+    print()
     return True
 
 def remove_book(title, library):
-    book = library.remove_book(title)
-    
+    book = library.find_book(title)
+
     if book is None:
         print("Book not found.")
-        return False
+        return None
     
-    print(f"{book.title} has been removed from catalog.")
-    return True
+    while True:
+        print(f"Are you sure you want to delete {book.title}? ")
+        confirmation = input("Enter yes or no: ")
+        print()
+        
+        if confirmation.strip().lower() == "yes":
+            library.remove_book(book)
+            print(f"{book.title} has been removed from catalog.")
+            print()
+            return True
+        elif confirmation.strip().lower() == "no":
+            return False
+        else:
+            print("Please enter yes or no.")
+            print()
+
+
 
 def update_book_title(library, old_title, new_title):
     old_title = old_title.strip().lower()
@@ -239,7 +265,7 @@ def update_book_title(library, old_title, new_title):
         print()
         return None
 
-   
+    old_title = book.title
     updated_book = library.update_book_title(book, new_title)
     
     if updated_book is False:
@@ -247,5 +273,25 @@ def update_book_title(library, old_title, new_title):
         print()
         return False
     
-    print(f"{book.title} has been changed to {updated_book.title}")
+    print(f"{old_title} has been changed to {updated_book.title}")
+    return True
+
+def update_book_author(library, title, new_author):
+    book = library.find_book(title)
+    
+    if book is None:
+        print("Book not found.")
+        print()
+        return None
+
+    old_author = book.author
+    updated_book = library.update_book_author(book, new_author)
+    
+    if updated_book is False:
+        print("Invalid author name.")
+        print()
+        return False
+    
+    print(f"{old_author} has been changed to {updated_book.author}")
+    print()
     return True

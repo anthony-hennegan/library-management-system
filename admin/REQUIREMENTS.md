@@ -112,16 +112,16 @@ After all required functionality has been completed, consider implementing:
 
 The project is complete when all of the following are true:
 
-- [ ] Program runs without crashing.
-- [ ] User can add books.
-- [ ] User can view books.
-- [ ] User can search books.
-- [ ] User can update book information.
-- [ ] User can delete books.
-- [ ] Library saves to disk.
-- [ ] Library loads automatically on startup.
-- [ ] Invalid input is handled gracefully.
-- [ ] Code is organized into functions.
+- [x] Program runs without crashing.
+- [x] User can add books.
+- [x] User can view books.
+- [x] User can search books.
+- [x] User can update book information.
+- [x] User can delete books.
+- [x] Library saves to disk.
+- [x] Library loads automatically on startup.
+- [x] Invalid input is handled gracefully.
+- [x] Code is organized into functions.
 - [ ] Code is readable and appropriately commented.
 - [ ] README.md explains how to install and run the project.
 - [ ] Changes are committed to Git.

@@ -1,7 +1,7 @@
 from menus import (
     show_welcome_message,
     greet_reader,
-    show_main_menu
+    show_menu
     )
 from catalog import (
     display_available_books,
@@ -12,10 +12,13 @@ from catalog import (
     return_book,
     add_book,
     remove_book,
-    Library
+    Library,
+    update_book_title,
+    update_book_author
 )
 from utils import format_name
 from storage import load_books, save_books
+from json import JSONDecodeError
 
 
 # State
@@ -27,6 +30,8 @@ menu_options = [
     "Return Book",
     "Add Book",
     "Remove Book",
+    "Update Book Title",
+    "Update Book Author",
     "Exit"
 ]
 
@@ -34,6 +39,9 @@ try:
     books = load_books()
 except FileNotFoundError:
     print("No saved book data found. Starting with an empty library.")
+    books = []
+except JSONDecodeError:
+    print("Saved book data is empty or invalid. Starting with an empty library.")
     books = []
     
 library_name = "Bailey's Books and Bargains"
@@ -52,59 +60,88 @@ print("")
 
 # Main Menu
 while True:
-    show_main_menu(menu_options)
+    print()
+    print("      MAIN MENU")
+    print("----------------------")
+    show_menu(menu_options)
     print("")
     
-    users_choice = input("Enter option number: ").strip()
-    print("")
+    while True:
+        try:
+            users_choice = int(input("Enter option number: ").strip())
+            print("")
+            break
+        except ValueError:
+            print("Invalid Input")
+            print()
+            
 
-    if users_choice == menu_options.index("View Books"):
+    if users_choice == menu_options.index("View Books")+1:
+        
         display_available_books(library.books)
         print("")
             
         display_checked_out_books(library.books)
         print("")
+   
     
-    elif users_choice == menu_options.index("Search by Title"):
+    elif users_choice == menu_options.index("Search by Title")+1:
         search_title = input("Enter book title: ")
         print("")
 
         search_book_by_title(search_title, library)
-        
-    elif users_choice == menu_options.index("Search by Author"):
+                
+    elif users_choice == menu_options.index("Search by Author")+1:
         search_title = input("Enter author's name: ")
         print("")
 
         search_book_by_author(search_title, library)
         
-    elif users_choice == menu_options.index("Check Out Book"):
+    elif users_choice == menu_options.index("Check Out Book")+ 1:
         checkout_title = input("Which book would you like to checkout? ") 
         print("")
         
         if checkout_book(checkout_title, library):
             save_books(library.books)
 
-    elif users_choice == menu_options.index("Return Book"):
+    elif users_choice == menu_options.index("Return Book")+1:
         return_title = input("Which book would you like to return? ") 
         print("")
         
         if return_book(return_title, library):
             save_books(library.books)
         
-    elif users_choice == menu_options.index("Add Book"):
+    elif users_choice == menu_options.index("Add Book")+1:
         title = input("Enter book title: ")
         author = input("Enter author name: ")
-        
+        print()
         if add_book(title, author, library):
             save_books(library.books)
 
-    elif users_choice == menu_options.index("Remove Book"):
+    elif users_choice == menu_options.index("Remove Book")+1:
         title = input("Enter book title: ")
         
         if remove_book(title, library):
             save_books(library.books)
+    
+    elif users_choice == menu_options.index("Update Book Title")+1:
+        title = input("Enter book title: ")
+        new_title = input("Enter new title: ")
+        print()
+        
+        if update_book_title(library, title, new_title):
+            save_books(library.books)   
+               
+    elif users_choice == menu_options.index("Update Book Author")+1:
+        title = input("Enter book title: ")
+        new_author = input("Enter new author: ")
+        print()
+        
+        if update_book_author(library, title, new_author):
+            save_books(library.books)   
+    
              
-    elif users_choice == menu_options.index("Exit"):
+    elif users_choice == menu_options.index("Exit")+1:
         print("Thanks for stopping by!")
         break
     
