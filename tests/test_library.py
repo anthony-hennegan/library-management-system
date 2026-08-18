@@ -39,17 +39,19 @@ def test_remove_book_in_library():
     book_list = [book1]
 
     library = Library('Test Library', book_list)
-    result = library.remove_book(book1.title)
+    result = library.remove_book(book1)
     
     assert result is book1
     assert book1 not in library.books
 
 def test_remove_book_not_in_library():
     book1 = Book('book1', 'author1')
-    book_list = [book1]
-
+    book2 = Book('book2', 'author2')
+    book_list = [book1, book2]
+    
     library = Library('Test Library', book_list)
-    result = library.remove_book('book3')
+    book = library.find_book('book3')
+    result = library.remove_book(book)
     
     assert result is None
     

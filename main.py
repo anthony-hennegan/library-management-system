@@ -129,7 +129,7 @@ while True:
         print()
         
         if update_book_title(library, title, new_title):
-            save_books(library.books)   
+            save_books(library.books)
                
     elif users_choice == menu_options.index("Update Book Author")+1:
         title = input("Enter book title: ")

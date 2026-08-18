@@ -122,6 +122,6 @@ The project is complete when all of the following are true:
 - [x] Library loads automatically on startup.
 - [x] Invalid input is handled gracefully.
 - [x] Code is organized into functions.
-- [ ] Code is readable and appropriately commented.
+- [x] Code is readable and appropriately commented.
 - [x] README.md explains how to install and run the project.
 - [x] Changes are committed to Git.
