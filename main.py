@@ -21,7 +21,6 @@ from storage import load_books, save_books
 from json import JSONDecodeError
 
 
-# State
 menu_options = [
     "View Books",
     "Search by Title",
@@ -35,6 +34,7 @@ menu_options = [
     "Exit"
 ]
 
+# Load saved data and fall back to an empty library if no valid save exists.
 try:
     books = load_books()
 except FileNotFoundError:
@@ -46,10 +46,8 @@ except JSONDecodeError:
     
 library_name = "Bailey's Books and Bargains"
 library = Library(library_name, books)
+   
 
-# Render Section    
-
-# Greeting
 show_welcome_message(library_name)
 print("") 
 
@@ -58,7 +56,7 @@ reader_name = format_name(input("What is your name? "))
 greet_reader(reader_name)
 print("")
 
-# Main Menu
+# Main application loop. Each completed action returns here until Exit is selected.
 while True:
     print()
     print("      MAIN MENU")
@@ -79,34 +77,34 @@ while True:
     if users_choice == menu_options.index("View Books")+1:
         
         display_available_books(library.books)
-        print("")
+        print()
             
         display_checked_out_books(library.books)
-        print("")
+        print()
    
     
     elif users_choice == menu_options.index("Search by Title")+1:
         search_title = input("Enter book title: ")
-        print("")
+        print()
 
         search_book_by_title(search_title, library)
                 
     elif users_choice == menu_options.index("Search by Author")+1:
         search_title = input("Enter author's name: ")
-        print("")
+        print()
 
         search_book_by_author(search_title, library)
         
     elif users_choice == menu_options.index("Check Out Book")+ 1:
         checkout_title = input("Which book would you like to checkout? ") 
-        print("")
+        print()
         
         if checkout_book(checkout_title, library):
             save_books(library.books)
 
     elif users_choice == menu_options.index("Return Book")+1:
-        return_title = input("Which book would you like to return? ") 
-        print("")
+        return_title = input("Which book would you like to return? ")
+        print()
         
         if return_book(return_title, library):
             save_books(library.books)
@@ -115,6 +113,7 @@ while True:
         title = input("Enter book title: ")
         author = input("Enter author name: ")
         print()
+        
         if add_book(title, author, library):
             save_books(library.books)
 
